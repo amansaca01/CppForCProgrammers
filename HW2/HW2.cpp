@@ -7,10 +7,12 @@ using namespace std;
 
 int main() {
 
-	graph grafo(5,0.75);
+	graph grafo(5,1);
 
 	grafo.print_graph();
 
-	cout << grafo.neighbors(1)[2];
+	grafo.set_node_value(1,12);
+
+	cout << endl << grafo.E() << " " << grafo.get_node_value(1) ;
 	return 0;
 }

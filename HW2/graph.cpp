@@ -17,13 +17,14 @@ graph::graph(const int &size, const float &density, const pairs &range) :
 	// TODO: tiene sentido declarar esto aqui?
 	srand(time(0));
 
-	ad_matrix.resize(size, vector<int>(size));
+	ad_matrix = new int*[size];
 
 	for (int i = 0; i < size; ++i) {
+		nodes_value.push_back(i + 1);
+		ad_matrix[i] = new int[size];
 		for (int j = 0; j < i; ++j) {
 			if (prob() < density) {
-				ad_matrix[i][j] = ad_matrix[j][i] = prob(range);
-				edges++;
+				add_edge(i, j);
 			}
 		}
 	}
@@ -34,38 +35,80 @@ float graph::prob() {
 }
 
 int graph::prob(const pairs &range) {
-	return prob(range.first, range.second);
-}
-
-int graph::prob(const int &lower_range, const int &upper_range) {
-	int total_range = upper_range - lower_range;
-	return (rand() % total_range) + lower_range;
-
+	int total_range = range.second - range.first + 1;
+	return (rand() % total_range) + range.first;
 }
 
 int graph::V() {
-	return size ^ 2;
+	return size;
 }
 int graph::E() {
+
+	int edges = 0;
+	for (int i = 0; i < size; ++i) {
+		for (int j = 0; j < i; ++j) {
+			if (adjacent(i, j))
+				edges++;
+		}
+	}
+
 	return edges;
 }
 
 bool graph::adjacent(int x, int y) {
-	return ad_matrix[x][y]!=0;
+	return ad_matrix[x][y] != 0;
 }
 
-std::vector<int> graph::neighbors(int x){
+std::vector<int> graph::neighbors(int x) {
 	std::vector<int> adjacents;
 	for (int i = 0; i < size; ++i) {
-		if (adjacent(x,i)) adjacents.push_back(i);
+		if (adjacent(x, i))
+			adjacents.push_back(i);
 	}
 	return adjacents;
 }
+
+void graph::add_edge(int x, int y) {
+	add_edge(x, y, prob(range));
+}
+
+void graph::add_edge(int x, int y, int distance) {
+	if (!adjacent(x, y) && x != y && distance <= range.second
+			&& distance >= range.first) {
+		ad_matrix[x][y] = distance;
+		ad_matrix[y][x] = distance;
+	}
+}
+
+void graph::delete_edge(int x, int y) {
+	if (adjacent(x, y)) {
+		ad_matrix[x][y] = 0;
+		ad_matrix[y][x] = 0;
+	}
+}
+
+int graph::get_node_value(int x) {
+	if (x < size)
+		return nodes_value.at(x);
+	return -1; // returns -1 if x is not a node
+}
+
+void graph::set_node_value(int x, int a) {
+	if (a >= 0)
+		nodes_value.at(x) = a;
+}
+
+int graph::get_edge_value(int x, int y) {
+	if (adjacent(x, y))
+		return ad_matrix[x][y];
+	return -1; // returns -1 if there is no edge
+}
+
 void graph::print_graph() {
 
-	for (auto col = ad_matrix.begin(); col != ad_matrix.end(); ++col) {
-		for (auto row = col->begin(); row != (*col).end(); ++row) {
-			cout << *row;
+	for (int i = 0; i < size; ++i) {
+		for (int j = 0; j < size; ++j) {
+			cout << ad_matrix[i][j] << " ";
 		}
 		cout << endl;
 	}
