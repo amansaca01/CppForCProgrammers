@@ -30,11 +30,13 @@ public:
 	int get_node_value(int x); // returns the value associated with the node x.
 	void set_node_value(int x, int a); //sets the value associated with the node x to a.
 	int get_edge_value(int x, int y); //returns the value associated to the edge (x,y).
+	void set_edge_value(int x, int y,int distance); //sets the value associated to the edge (x,y) to v.
 	void print_graph();
 
 private:
-	int** ad_matrix; // connectivity matrices are used
+	bool** ad_matrix; // connectivity matrices are used
 	std::vector<int> nodes_value;
+	std::vector<std::vector<int>> edges_value;
 	int size; // number of nodes
 	float density;
 	pairs range; // pair containing upper and lower edges distance range
