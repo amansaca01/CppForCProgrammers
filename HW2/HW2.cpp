@@ -1,18 +1,19 @@
 #include<iostream>
 
 #include "graph.h"
+#include "priority_queue.h"
 
 using namespace std;
 
 
 int main() {
 
-	graph grafo(5,1);
+	graph G(5,0.5);
 
-	grafo.print_graph();
+	G.print_graph();
 
-	grafo.set_node_value(1,12);
+	G.set_node_value(1,12);
 
-	cout << endl << grafo.E() << " " << grafo.get_node_value(1) ;
+	cout << endl << G.adjacent(1,0) << " " << G.get_node_value(1) ;
 	return 0;
 }

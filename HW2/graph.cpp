@@ -12,17 +12,16 @@
 using namespace std;
 
 graph::graph(const int &size, const float &density, const pairs &range) :
-		size(size), density(density), range(range) {
+		size(size), range(range) {
 
 	// TODO: tiene sentido declarar esto aqui?
 	srand(time(0));
 
-	ad_matrix = new bool*[size];
-	edges_value.resize(size, vector<int>(size));
+	ad_matrix = new int*[size];
 
 	for (int i = 0; i < size; ++i) {
 		nodes_value.push_back(i + 1);
-		ad_matrix[i] = new bool[size]; // by default bool is set to false
+		ad_matrix[i] = new int[size]; // by default int is set to 0
 		for (int j = 0; j < i; ++j) {
 			if (prob() < density) {
 				add_edge(i, j);
@@ -56,11 +55,11 @@ int graph::E() {
 	return edges;
 }
 
-bool graph::adjacent(int x, int y) {
-	return ad_matrix[x][y];
+bool graph::adjacent(const int &x, const int &y) {
+	return ad_matrix[x][y] != 0;
 }
 
-std::vector<int> graph::neighbors(int x) {
+std::vector<int> graph::neighbors(const int &x) {
 	std::vector<int> adjacents;
 	for (int i = 0; i < size; ++i) {
 		if (adjacent(x, i))
@@ -69,46 +68,46 @@ std::vector<int> graph::neighbors(int x) {
 	return adjacents;
 }
 
-void graph::add_edge(int x, int y) {
+void graph::add_edge(const int &x, const int &y) {
 	add_edge(x, y, prob(range));
 }
 
-void graph::add_edge(int x, int y, int distance) {
+void graph::add_edge(const int &x, const int &y, const int &distance) {
 	if (!adjacent(x, y) && x != y && distance <= range.second
 			&& distance >= range.first) {
-		ad_matrix[x][y] = true;
-		ad_matrix[y][x] = true;
+		ad_matrix[x][y] = distance;
+		ad_matrix[y][x] = distance;
 	}
-	set_edge_value(x, y, distance);
 }
 
-void graph::delete_edge(int x, int y) {
+void graph::delete_edge(const int &x, const int &y) {
 	if (adjacent(x, y)) {
-		ad_matrix[x][y] = false;
-		ad_matrix[y][x] = false;
+		ad_matrix[x][y] = 0;
+		ad_matrix[y][x] = 0;
 	}
 }
 
-int graph::get_node_value(int x) {
+int graph::get_node_value(const int &x) {
 	if (x >= 0 && x < size)
 		return nodes_value.at(x);
 	return 0; // returns 0 if x is not a node
 }
 
-void graph::set_node_value(int x, int a) {
+void graph::set_node_value(const int &x, const int &a) {
 	if (a > 0 && x >= 0 && x < size)
 		nodes_value.at(x) = a;
 }
 
-int graph::get_edge_value(int x, int y) {
+int graph::get_edge_value(const int &x, const int &y) {
 	if (adjacent(x, y))
-		return edges_value.at(x).at(y);
+		return ad_matrix[x][y];
 	return 0; // returns 0 if there is no edge
 }
 
-void graph::set_edge_value(int x, int y, int distance) {
-	if (adjacent(x, y) && distance > 0) {
-		edges_value[x][y] = distance;
+void graph::set_edge_value(const int &x, const int &y, const int &distance) {
+	if (adjacent(x, y) && distance <= range.second && distance >= range.first) {
+		ad_matrix[x][y] = distance;
+		ad_matrix[y][x] = distance;
 	}
 }
 
