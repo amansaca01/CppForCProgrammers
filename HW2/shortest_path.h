@@ -8,6 +8,7 @@
 #ifndef HW2_SHORTEST_PATH_H_
 #define HW2_SHORTEST_PATH_H_
 
+#include "graph.h"
 
 class ShortestPath {
 public:

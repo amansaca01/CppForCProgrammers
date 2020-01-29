@@ -12,19 +12,24 @@
 #define HW2_PRIORITY_QUEUE_H_
 
 #include<vector>
+#include "graph.h"
 
 class PriorityQueue {
 public:
-	PriorityQueue();
+	PriorityQueue(const graph &G);
 	virtual ~PriorityQueue() = default;
 
+	void chgPrioirity(const int &node, const size_t &priority); //changes the priority of queue element.
 	void minPrioirty(); //removes the top element of the queue
 	bool contains_node(const int &node);
-	void insert(const int &node); //insert queue_element into queue (last position)
+	void insert(const int &node, const size_t &priority); //insert queue_element into queue (last position)
 	int top(const int &node); //returns the top element of the queue
 	int size(); //return the number of queue_elements
+	int get_priority(const int &node); //return the node priority
+	void priority_sort(); //sorts node_queue by priority
 
 private:
+	graph G; // graph on which the algorithm is being run
 	std::vector<int> node_queue; // Queue of nodes
 };
 

@@ -6,7 +6,7 @@
  */
 
 #include "shortest_path.h"
-#include "priority_queue"
+#include "priority_queue.h"
 #include "graph.h"
 #include <vector>
 #include <numeric> //iota
@@ -24,8 +24,8 @@ std::vector<int> ShortestPath::vertices() {
 
 std::vector<int> ShortestPath::path(const int &u, const int &w) {
 
-	PriorityQueue path_queue;
-	path_queue.insert(u);
+	PriorityQueue path_queue(G);
+	path_queue.insert(u,0);
 
 	int center = u;
 	std::vector<int> adjacents = G.neighbors(center);
