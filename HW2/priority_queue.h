@@ -22,7 +22,7 @@ public:
 	void chgPrioirity(const int &node, const size_t &priority); //changes the priority of queue element.
 	void minPrioirty(); //removes the top element of the queue
 	bool contains_node(const int &node);
-	void insert(const int &node, const size_t &priority); //insert queue_element into queue (last position)
+	void insert(const int &node, const size_t &priority); //insert queue_element into queue
 	int top(const int &node); //returns the top element of the queue
 	int size(); //return the number of queue_elements
 	int get_priority(const int &node); //return the node priority

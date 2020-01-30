@@ -52,4 +52,5 @@ int PriorityQueue::get_priority(const int &node){
 
 void PriorityQueue::priority_sort(){
 
+	std::sort(node_queue)
 }
