@@ -17,6 +17,6 @@ int main() {
 
 	cout << endl << G.adjacent(1,0) << " " << G.get_node_value(1) <<endl ;
 
-	cout << ShortestPath(G).vertices().size() <<endl;
+	cout << ShortestPath(G).vertices().size() << "hola" <<endl;
 	return 0;
 }
