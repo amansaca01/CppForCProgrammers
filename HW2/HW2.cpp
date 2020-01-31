@@ -10,7 +10,7 @@ int main() {
 
 	srand(123);
 
-	graph G(5, 0);
+	graph G(5, 1);
 
 	G.print_graph();
 
