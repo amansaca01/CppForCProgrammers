@@ -10,6 +10,7 @@
 #include "graph.h"
 #include <vector>
 #include <numeric> //iota
+#include<iostream>
 
 ShortestPath::ShortestPath(const graph &G) :
 		G(G) {
@@ -25,10 +26,43 @@ std::vector<int> ShortestPath::vertices() {
 std::vector<int> ShortestPath::path(const int &u, const int &w) {
 
 	PriorityQueue path_queue(G);
-	path_queue.insert(u,0);
+	path_queue.insert(u, 0);
 
 	int center = u;
 	std::vector<int> adjacents = G.neighbors(center);
 	return adjacents;
+
+}
+
+int ShortestPath::path_size(const int &u, const int &w) {
+
+	PriorityQueue open_queue(G);
+	PriorityQueue closed_queue(G);
+
+	closed_queue.insert(u, 0);
+
+	int center = u;
+
+	while (!closed_queue.contains_node(w)) {
+		std::vector<int> adjacents = G.neighbors(center);
+		for (int &it : adjacents) {
+
+			int priority = G.get_edge_value(center, it)
+					+ closed_queue.get_priority(center);
+			open_queue.insert(it, priority);
+		}
+		if (open_queue.size() == 0) {
+			std::cout << "Grafo no conexo." << std::endl;
+			return -1;
+		}
+
+		open_queue.priority_sort();
+
+		center = open_queue.top();
+		closed_queue.insert(center, open_queue.get_priority(center));
+
+		open_queue.minPrioirty();
+	}
+	return closed_queue.get_priority(w);
 
 }

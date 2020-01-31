@@ -23,7 +23,7 @@ public:
 	void minPrioirty(); //removes the top element of the queue
 	bool contains_node(const int &node);
 	void insert(const int &node, const size_t &priority); //insert queue_element into queue (last position)
-	int top(const int &node); //returns the top element of the queue
+	int top(); //returns the top element of the queue
 	int size(); //return the number of queue_elements
 	int get_priority(const int &node); //return the node priority
 	void priority_sort(); //sorts node_queue by priority
