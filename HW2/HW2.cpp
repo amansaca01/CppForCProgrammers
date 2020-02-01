@@ -6,17 +6,29 @@
 
 using namespace std;
 
-
 int main() {
 
-	graph G(5,0.5);
+	srand(123);
+
+	graph G(5, 0);
 
 	G.print_graph();
 
-	G.set_node_value(1,12);
+	G.set_node_value(1, 12);
 
-	cout << endl << G.adjacent(1,0) << " " << G.get_node_value(1) <<endl ;
+	//cout << endl << G.neighbors(1) << " " << G.get_node_value(1) << endl;
 
-	cout << ShortestPath(G).vertices().size() <<endl;
+	auto elementos = G.neighbors(1);
+//
+//	for (auto i = elementos.begin(); i != elementos.end(); ++i)
+//		cout << *i << endl;
+	cout << endl;
+//	cout << ShortestPath(G).vertices().size() << endl;
+
+	ShortestPath camino(G);
+	int lon = camino.path_size(1, 3);
+
+	cout << endl << lon << endl;
+
 	return 0;
 }

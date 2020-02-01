@@ -14,8 +14,6 @@ using namespace std;
 graph::graph(const int &size, const float &density, const pairs &range) :
 		size(size), range(range) {
 
-	// TODO: tiene sentido declarar esto aqui?
-	srand(time(0));
 
 	ad_matrix = new int*[size];
 
@@ -90,11 +88,11 @@ void graph::delete_edge(const int &x, const int &y) {
 int graph::get_node_value(const int &x) {
 	if (x >= 0 && x < size)
 		return nodes_value.at(x);
-	return 0; // returns 0 if x is not a node
+	return -1; // returns 0 if x is not a node
 }
 
 void graph::set_node_value(const int &x, const int &a) {
-	if (a > 0 && x >= 0 && x < size)
+	if (a >= 0 && x >= 0 && x < size)
 		nodes_value.at(x) = a;
 }
 
