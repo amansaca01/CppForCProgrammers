@@ -18,7 +18,7 @@ graph::graph(const int &size, const float &density, const int &range) :
 
 	for (int i = 0; i < size; ++i) {
 
-		node_value.push_back(i + 1);
+		nodes_value.push_back(i + 1);
 
 		ad_matrix[i] = new int[size];
 
@@ -100,13 +100,13 @@ void graph::delete_edge(const int &x, const int &y) {
 
 int graph::get_node_value(const int &x) {
 	if (x >= 0 && x < size)
-		return node_value.at(x);
+		return nodes_value.at(x);
 	return -1; // returns 0 if x is not a node
 }
 
 void graph::set_node_value(const int &x, const int &a) {
 	if (a >= 0 && x >= 0 && x < size)
-		node_value.at(x) = a;
+		nodes_value.at(x) = a;
 }
 
 int graph::get_edge_value(const int &x, const int &y) {
