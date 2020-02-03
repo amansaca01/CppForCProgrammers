@@ -19,7 +19,7 @@ PriorityQueue::PriorityQueue(const int &size) {
 
 void PriorityQueue::chgPrioirity(const int &node, const int &priority) {
 	if (contains_node(node)) {
-		node_priority.at(node) = priority;
+		node_priority[node] = priority;
 	}
 }
 

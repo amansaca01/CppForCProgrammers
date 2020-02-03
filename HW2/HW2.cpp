@@ -1,4 +1,6 @@
 #include<iostream>
+#include <numeric>
+
 
 #include "graph.h"
 #include "priority_queue.h"
@@ -10,28 +12,25 @@ int main() {
 
 	srand(123);
 
-	graph G(5, 0.5);
+	int nodes_no = 5;
+	graph G(nodes_no , 0.2);
 
 	G.print_graph();
 
-	G.set_node_value(1, 12);
+	ShortestPath djisktra(G);
 
-	//cout << endl << G.neighbors(1) << " " << G.get_node_value(1) << endl;
+	vector<int> paths;
 
-	auto elementos = G.neighbors(1);
-//
-//	for (auto i = elementos.begin(); i != elementos.end(); ++i)
-//		cout << *i << endl;
-	cout << endl;
-//	cout << ShortestPath(G).vertices().size() << endl;
+	for (int i = 1; i < nodes_no ; ++i) {
+		int lon = djisktra.path_size(0, i);
+		if(lon>=1){
+			paths.push_back(lon);
+			cout << i << " "<< lon << endl;
+		}
+	}
 
-	ShortestPath camino(G);
-	int lon = camino.path_size(1, 3);
-	int lon2 = camino.path_size(1, 4);
-	int lon3 = camino.path_size(2, 1);
+	cout << endl << accumulate( paths.begin(), paths.end(), 0.0)/paths.size() <<endl;
 
-	camino.path(1,4);
-	//cout << endl << lon << " " << lon2 << endl;
 
 	return 0;
 }

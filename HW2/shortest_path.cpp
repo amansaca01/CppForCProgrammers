@@ -75,6 +75,7 @@ void ShortestPath::djistra_algo(const int &u, const int &w) {
 	if (closed_queue->size() == 0)
 		closed_queue->insert(u, 0);
 
+
 	int center = closed_queue->tail();
 
 	while (!closed_queue->contains_node(w)) {
