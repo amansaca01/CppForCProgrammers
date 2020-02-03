@@ -10,9 +10,8 @@
 #ifndef GRAPH_H_
 #define GRAPH_H_
 
-//typedef std::pair<int, int> pairs;
-
 class graph {
+
 public:
 	graph(const int &size = 1, const float &density = 0, const int &range = 10);
 	virtual ~graph() = default;

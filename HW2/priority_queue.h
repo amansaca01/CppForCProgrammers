@@ -15,10 +15,10 @@
 #include "graph.h"
 
 class PriorityQueue {
+
 public:
 	PriorityQueue(const graph &G);
 	virtual ~PriorityQueue() = default;
-
 	void chgPrioirity(const int &node, const size_t &priority); //changes the priority of queue element.
 	void minPrioirty(); //removes the top element of the queue
 	bool contains_node(const int &node);

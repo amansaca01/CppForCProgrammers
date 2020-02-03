@@ -19,7 +19,6 @@ PriorityQueue::PriorityQueue(const graph &G) :
 
 void PriorityQueue::chgPrioirity(const int &node, const size_t &priority) {
 	if (priority >= 0 && contains_node(node)) {
-//		std::cout << "PQ: " << node << " " << priority << std::endl;
 		G.set_node_value(node, priority);
 	}
 }
@@ -55,7 +54,6 @@ int PriorityQueue::get_priority(const int &node) {
 }
 
 void PriorityQueue::priority_sort() {
-
 	std::sort(node_queue.begin(), node_queue.end(),
 			[this](int i, int j) {return get_priority(i)<get_priority(j);});
 
