@@ -10,16 +10,15 @@
 #ifndef GRAPH_H_
 #define GRAPH_H_
 
-typedef std::pair<int, int> pairs;
+//typedef std::pair<int, int> pairs;
 
 class graph {
 public:
-	graph(const int &size = 1, const float &density = 0, const pairs &range =
-			std::make_pair(1, 10));
+	graph(const int &size = 1, const float &density = 0, const int &range = 10);
 	virtual ~graph() = default;
 
 	float prob();
-	int prob(const pairs &range);
+	int prob(const int &range);
 	int V(); //returns the number of vertices in the graph
 	int E(); //returns the number of edges in the graph
 	bool adjacent(const int &x, const int &y); //tests whether there is an edge from node x to node y.
@@ -35,9 +34,9 @@ public:
 
 private:
 	int** ad_matrix; // connectivity matrices are used
-	std::vector<int> nodes_value;
+	std::vector<int> node_value;
 	int size; // number of nodes
-	pairs range; // pair containing upper and lower edges distance range
+	int range; // pair containing upper and lower edges distance range
 };
 
 #endif /* GRAPH_H_ */

@@ -46,10 +46,11 @@ int ShortestPath::path_size(const int &u, const int &w) {
 	while (!closed_queue.contains_node(w)) {
 		std::vector<int> adjacents = G.neighbors(center);
 		for (int &it : adjacents) {
-
-			int priority = G.get_edge_value(center, it)
-					+ closed_queue.get_priority(center);
-			open_queue.insert(it, priority);
+			if (!closed_queue.contains_node(it)) {
+				int priority = G.get_edge_value(center, it)
+						+ closed_queue.get_priority(center);
+				open_queue.insert(it, priority);
+			}
 		}
 		if (open_queue.size() == 0) {
 			std::cout << "Grafo no conexo." << std::endl;
