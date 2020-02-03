@@ -16,6 +16,7 @@ graph::graph(const int &size, const float &density, const pairs &range) :
 
 	ad_matrix.resize(size, std::vector<int>(size, 0)); // initializes adjacents matrix with 0s
 	nodes_value.resize(size,0);
+
 	for (int i = 0; i < size; ++i) {
 		for (int j = 0; j < i; ++j) {
 			if (prob() < density) {

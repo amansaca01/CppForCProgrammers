@@ -13,6 +13,7 @@
 #include<iostream>
 #include <algorithm>
 
+
 ShortestPath::ShortestPath(const graph &G) :
 		G(G) {
 	int size = this->G.V();
@@ -29,6 +30,7 @@ std::vector<int> ShortestPath::vertices() {
 std::vector<int> ShortestPath::path(const int &u, const int &w) {
 
 	std::vector<int> shortest_path = { w };
+
 
 	int min_path = path_size(u, w);
 	PriorityQueue closed_queue = nodes_queues.at(u);

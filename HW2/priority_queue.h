@@ -25,6 +25,7 @@ public:
 	void insert(const int &node, const int &priority); //insert queue_element into queue (last position)
 	int top(); //returns the top element of the queue
 	int tail(); //returns the last element of the queue
+
 	int size(); //return the number of queue_elements
 	int get_priority(const int &node); //return the node priority
 	void set_priority(const int &node,const int &priority); //sets node priority

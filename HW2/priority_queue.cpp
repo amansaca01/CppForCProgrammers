@@ -20,6 +20,7 @@ PriorityQueue::PriorityQueue(const int &size) {
 void PriorityQueue::chgPrioirity(const int &node, const int &priority) {
 	if (contains_node(node)) {
 		node_priority[node] = priority;
+
 	}
 }
 
@@ -32,6 +33,7 @@ bool PriorityQueue::contains_node(const int &node) {
 			!= node_queue.end();
 }
 void PriorityQueue::insert(const int &node, const int &priority) {
+
 	if (!contains_node(node)) {
 		node_queue.push_back(node);
 		chgPrioirity(node, priority);
@@ -55,6 +57,7 @@ int PriorityQueue::size() {
 
 int PriorityQueue::get_priority(const int &node) {
 	return node_priority.at(node);
+
 }
 
 void PriorityQueue::priority_sort() {
