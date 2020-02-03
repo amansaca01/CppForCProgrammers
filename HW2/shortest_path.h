@@ -2,7 +2,7 @@
  * shortest_path.h
  *
  *  Created on: Jan 29, 2020
- *      Author: amanda.salazar
+ *      Author: andrea.yuste
  */
 
 #ifndef HW2_SHORTEST_PATH_H_

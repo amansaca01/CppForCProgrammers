@@ -2,13 +2,17 @@
  * graph.h
  *
  *  Created on: Jan 27, 2020
- *      Author: amanda.salazar
+ *      Author: andrea.yuste
  */
-
-#include<vector>
 
 #ifndef GRAPH_H_
 #define GRAPH_H_
+
+#include <iostream>
+#include <stdlib.h>
+#include <vector>
+
+using namespace std;
 
 class graph {
 

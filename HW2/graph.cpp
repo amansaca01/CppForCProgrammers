@@ -2,14 +2,10 @@
  * graph.cpp
  *
  *  Created on: Jan 27, 2020
- *      Author: amanda.salazar
+ *      Author: andrea.yuste
  */
 
 #include "graph.h"
-#include<iostream>
-#include<vector>
-
-using namespace std;
 
 graph::graph(const int &size, const float &density, const int &range) :
 		size(size), range(range) {

@@ -2,7 +2,7 @@
  * priority_queue.h
  *
  *  Created on: Jan 29, 2020
- *      Author: amanda.salazar
+ *      Author: andrea.yuste
  *
  *      The value of the PriorityQueue is to always have access to the vertex with the next shortest link
  *      in the shortest path calculation at the top of the queue.
@@ -11,7 +11,6 @@
 #ifndef HW2_PRIORITY_QUEUE_H_
 #define HW2_PRIORITY_QUEUE_H_
 
-#include<vector>
 #include "graph.h"
 
 class PriorityQueue {

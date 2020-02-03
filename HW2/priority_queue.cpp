@@ -2,16 +2,12 @@
  * priority_queue.cpp
  *
  *  Created on: Jan 29, 2020
- *      Author: amanda.salazar
+ *      Author: andrea.yuste
  */
 
 #include "priority_queue.h"
 
-#include <iostream>
-#include<vector>
 #include <algorithm>
-
-#include "graph.h"
 
 PriorityQueue::PriorityQueue(const graph &G) :
 		G(G) {

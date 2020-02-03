@@ -2,15 +2,13 @@
  * shortest_path.cpp
  *
  *  Created on: Jan 29, 2020
- *      Author: amanda.salazar
+ *      Author: andrea.yuste
  */
 
 #include "shortest_path.h"
 #include "priority_queue.h"
-#include "graph.h"
-#include <vector>
-#include <numeric> //iota
-#include<iostream>
+
+#include <numeric>
 
 ShortestPath::ShortestPath(const graph &G) :
 		G(G) {
@@ -53,7 +51,10 @@ int ShortestPath::path_size(const int &u, const int &w) {
 			}
 		}
 		if (open_queue.size() == 0) {
-			std::cout << "Grafo no conexo." << std::endl;
+			std::cout << "THE GRAPH IS NOT CONNECTED. "
+					<< "WE COULD NOT COMPUTE THE SHORTEST PATH BETWEEN TWO OF THE NODES. "
+					<< "WE HAVE GIVEN THE VALUE -1 TO THE LENGTH OF THIS PATH."
+					<< endl << endl;
 			return -1;
 		}
 
