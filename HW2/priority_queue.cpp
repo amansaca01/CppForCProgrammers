@@ -13,14 +13,14 @@
 
 #include "graph.h"
 
-PriorityQueue::PriorityQueue(const graph &G) :
-		G(G) {
+PriorityQueue::PriorityQueue(const int &size) {
+	node_priority.resize(size,0);
 }
 
-void PriorityQueue::chgPrioirity(const int &node, const size_t &priority) {
-	if (priority >= 0 && contains_node(node)) {
-		std::cout << "PQ: " << node << " " << priority << std::endl;
-		G.set_node_value(node, priority);
+void PriorityQueue::chgPrioirity(const int &node, const int &priority) {
+	if (contains_node(node)) {
+		node_priority[node] = priority;
+
 	}
 }
 
@@ -32,7 +32,8 @@ bool PriorityQueue::contains_node(const int &node) {
 	return std::find(node_queue.begin(), node_queue.end(), node)
 			!= node_queue.end();
 }
-void PriorityQueue::insert(const int &node, const size_t &priority) {
+void PriorityQueue::insert(const int &node, const int &priority) {
+
 	if (!contains_node(node)) {
 		node_queue.push_back(node);
 		chgPrioirity(node, priority);
@@ -46,12 +47,17 @@ int PriorityQueue::top() {
 	return node_queue.front();
 }
 
+int PriorityQueue::tail() {
+	return node_queue.back();
+}
+
 int PriorityQueue::size() {
 	return node_queue.size();
 }
 
 int PriorityQueue::get_priority(const int &node) {
-	return G.get_node_value(node);
+	return node_priority.at(node);
+
 }
 
 void PriorityQueue::priority_sort() {

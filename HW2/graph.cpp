@@ -14,12 +14,10 @@ using namespace std;
 graph::graph(const int &size, const float &density, const pairs &range) :
 		size(size), range(range) {
 
-
-	ad_matrix = new int*[size];
+	ad_matrix.resize(size, std::vector<int>(size, 0)); // initializes adjacents matrix with 0s
+	nodes_value.resize(size,0);
 
 	for (int i = 0; i < size; ++i) {
-		nodes_value.push_back(i + 1);
-		ad_matrix[i] = new int[size]; // by default int is set to 0
 		for (int j = 0; j < i; ++j) {
 			if (prob() < density) {
 				add_edge(i, j);
@@ -106,6 +104,7 @@ void graph::set_edge_value(const int &x, const int &y, const int &distance) {
 	if (adjacent(x, y) && distance <= range.second && distance >= range.first) {
 		ad_matrix[x][y] = distance;
 		ad_matrix[y][x] = distance;
+
 	}
 }
 

@@ -34,7 +34,7 @@ public:
 	void print_graph();
 
 private:
-	int** ad_matrix; // connectivity matrices are used
+	std::vector<std::vector<int>> ad_matrix; // connectivity matrices are used
 	std::vector<int> nodes_value;
 	int size; // number of nodes
 	pairs range; // pair containing upper and lower edges distance range

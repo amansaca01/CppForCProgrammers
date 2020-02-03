@@ -1,4 +1,5 @@
 #include<iostream>
+#include <numeric>
 
 #include "graph.h"
 #include "priority_queue.h"
@@ -8,27 +9,47 @@ using namespace std;
 
 int main() {
 
-	srand(123);
+	srand(time(0));
 
-	graph G(5, 0);
+	int nodes_no = 50;
 
-	G.print_graph();
+	for (auto &density : vector<float> { 0.2, 0.4 }) {
 
-	G.set_node_value(1, 12);
+		cout << endl << "Computing average shortest path for a random graph of "
+				<< nodes_no << " and density " << density * 100 << "% ..."
+				<< endl;
+		graph G(nodes_no, density);
 
-	//cout << endl << G.neighbors(1) << " " << G.get_node_value(1) << endl;
+		G.print_graph();
 
-	auto elementos = G.neighbors(1);
-//
-//	for (auto i = elementos.begin(); i != elementos.end(); ++i)
-//		cout << *i << endl;
-	cout << endl;
-//	cout << ShortestPath(G).vertices().size() << endl;
+		ShortestPath djisktra(G);
 
-	ShortestPath camino(G);
-	int lon = camino.path_size(1, 3);
+		vector<int> paths;
 
-	cout << endl << lon << endl;
+		for (int i = 1; i < nodes_no; ++i) {
+			int lon = djisktra.path_size(0, i);
+			if (lon >= 1) {
+				paths.push_back(lon);
+
+				vector<int> longest_path = djisktra.path(0, i);
+
+				for (auto &node : longest_path) {
+					cout << node << "--";
+				}
+				cout << " | " << lon;
+
+
+			}
+			cout << endl;
+		}
+
+		cout << endl << "Average path length: "
+				<< accumulate(paths.begin(), paths.end(), 0.0) / paths.size()
+				<< endl << endl
+				<< "------------------------------------------------------";
+
+	}
+
 
 	return 0;
 }
