@@ -20,7 +20,7 @@ int main() {
 				<< endl;
 		graph G(nodes_no, density);
 
-		G.print_graph();
+		//	G.print_graph();
 
 		ShortestPath djisktra(G);
 
@@ -30,17 +30,7 @@ int main() {
 			int lon = djisktra.path_size(0, i);
 			if (lon >= 1) {
 				paths.push_back(lon);
-
-				vector<int> longest_path = djisktra.path(0, i);
-
-				for (auto &node : longest_path) {
-					cout << node << "--";
-				}
-				cout << " | " << lon;
-
-
 			}
-			cout << endl;
 		}
 
 		cout << endl << "Average path length: "
@@ -49,7 +39,6 @@ int main() {
 				<< "------------------------------------------------------";
 
 	}
-
 
 	return 0;
 }

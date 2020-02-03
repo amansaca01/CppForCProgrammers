@@ -15,7 +15,7 @@ graph::graph(const int &size, const float &density, const pairs &range) :
 		size(size), range(range) {
 
 	ad_matrix.resize(size, std::vector<int>(size, 0)); // initializes adjacents matrix with 0s
-	nodes_value.resize(size,0);
+	nodes_value.resize(size, 0);
 
 	for (int i = 0; i < size; ++i) {
 		for (int j = 0; j < i; ++j) {
@@ -25,6 +25,7 @@ graph::graph(const int &size, const float &density, const pairs &range) :
 		}
 	}
 }
+
 
 float graph::prob() {
 	return rand() / static_cast<float>(RAND_MAX);
