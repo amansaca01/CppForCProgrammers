@@ -13,13 +13,13 @@
 
 #include "graph.h"
 
-
-PriorityQueue::PriorityQueue(const graph &G) : G(G) {
+PriorityQueue::PriorityQueue(const int &size) {
+	node_priority.resize(size,0);
 }
 
-void PriorityQueue::chgPrioirity(const int &node, const size_t &priority){
-	if(priority>=0 && contains_node(node)){
-		G.set_node_value(node,priority);
+void PriorityQueue::chgPrioirity(const int &node, const int &priority) {
+	if (contains_node(node)) {
+		node_priority[node] = priority;
 	}
 }
 
@@ -31,25 +31,35 @@ bool PriorityQueue::contains_node(const int &node) {
 	return std::find(node_queue.begin(), node_queue.end(), node)
 			!= node_queue.end();
 }
-void PriorityQueue::insert(const int &node,const size_t &priority) {
-	if (!contains_node(node))
+void PriorityQueue::insert(const int &node, const int &priority) {
+	if (!contains_node(node)) {
 		node_queue.push_back(node);
-	else std::cout << "Node " << node << " is already on the queue!";
-	chgPrioirity(node,priority);
+		chgPrioirity(node, priority);
+	} else {
+		if (get_priority(node) > priority)
+			chgPrioirity(node, priority);
+	}
 }
 
-int PriorityQueue::top(const int &node) {
+int PriorityQueue::top() {
 	return node_queue.front();
+}
+
+int PriorityQueue::tail() {
+	return node_queue.back();
 }
 
 int PriorityQueue::size() {
 	return node_queue.size();
 }
 
-int PriorityQueue::get_priority(const int &node){
-	return G.get_node_value(node);
+int PriorityQueue::get_priority(const int &node) {
+	return node_priority.at(node);
 }
 
-void PriorityQueue::priority_sort(){
+void PriorityQueue::priority_sort() {
+
+	std::sort(node_queue.begin(), node_queue.end(),
+			[this](int i, int j) {return get_priority(i)<get_priority(j);});
 
 }

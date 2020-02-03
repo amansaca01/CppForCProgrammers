@@ -9,6 +9,7 @@
 #define HW2_SHORTEST_PATH_H_
 
 #include "graph.h"
+#include "priority_queue.h"
 
 class ShortestPath {
 public:
@@ -16,8 +17,12 @@ public:
 	virtual ~ShortestPath() = default;
 	std::vector<int> vertices(); //list of vertices in G(V,E)
 	std::vector<int> path(const int &u, const int &w); //find shortest path between u-w and returns the sequence of vertices representing shorest path
+	int path_size(const int &u, const int &w); //return the path cost associated with the shortest path
+	void djistra_algo(const int &u, const int &w); //computes de Djistra algorithm
 private:
 	graph G; // graph on which the algorithm is being run
+
+	std::vector<PriorityQueue> nodes_queues; //qeues un nodes in the closed set
 };
 
 #endif /* HW2_SHORTEST_PATH_H_ */

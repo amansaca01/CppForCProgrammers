@@ -14,14 +14,9 @@ using namespace std;
 graph::graph(const int &size, const float &density, const pairs &range) :
 		size(size), range(range) {
 
-	// TODO: tiene sentido declarar esto aqui?
-	srand(time(0));
-
-	ad_matrix = new int*[size];
-
+	ad_matrix.resize(size, std::vector<int>(size, 0)); // initializes adjacents matrix with 0s
+	nodes_value.resize(size,0);
 	for (int i = 0; i < size; ++i) {
-		nodes_value.push_back(i + 1);
-		ad_matrix[i] = new int[size]; // by default int is set to 0
 		for (int j = 0; j < i; ++j) {
 			if (prob() < density) {
 				add_edge(i, j);
@@ -90,11 +85,11 @@ void graph::delete_edge(const int &x, const int &y) {
 int graph::get_node_value(const int &x) {
 	if (x >= 0 && x < size)
 		return nodes_value.at(x);
-	return 0; // returns 0 if x is not a node
+	return -1; // returns 0 if x is not a node
 }
 
 void graph::set_node_value(const int &x, const int &a) {
-	if (a > 0 && x >= 0 && x < size)
+	if (a >= 0 && x >= 0 && x < size)
 		nodes_value.at(x) = a;
 }
 
@@ -108,6 +103,7 @@ void graph::set_edge_value(const int &x, const int &y, const int &distance) {
 	if (adjacent(x, y) && distance <= range.second && distance >= range.first) {
 		ad_matrix[x][y] = distance;
 		ad_matrix[y][x] = distance;
+
 	}
 }
 
