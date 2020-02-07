@@ -10,14 +10,18 @@
 
 #include <numeric>
 
+// PROPOSED METHODS
+
 ShortestPath::ShortestPath(const graph &G) :
 		G(G) {
 }
 
+// List of vertices in G(V,E) ???
 std::vector<int> ShortestPath::vertices() {
 
-	std::vector<int> lista(G.V());
-	std::iota(lista.begin(), lista.end(), 0);
+	vector<int> lista(G.V());
+	iota(lista.begin(), lista.end(), 0);
+
 	return lista;
 }
 
@@ -28,8 +32,8 @@ std::vector<int> ShortestPath::path(const int &u, const int &w) {
 
 	int center = u;
 	std::vector<int> adjacents = G.neighbors(center);
-	return adjacents;
 
+	return adjacents;
 }
 
 int ShortestPath::path_size(const int &u, const int &w) {
@@ -41,10 +45,10 @@ int ShortestPath::path_size(const int &u, const int &w) {
 
 	int center = u;
 
-	while (!closed_queue.contains_node(w)) {
+	while (!closed_queue.contains(w)) {
 		std::vector<int> adjacents = G.neighbors(center);
 		for (int &it : adjacents) {
-			if (!closed_queue.contains_node(it)) {
+			if (!closed_queue.contains(it)) {
 				int priority = G.get_edge_value(center, it)
 						+ closed_queue.get_priority(center);
 				open_queue.insert(it, priority);

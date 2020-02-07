@@ -62,5 +62,6 @@ int main() {
 				<< " paths: 1 to 2, ..., 1 to " << size << " is: " << average
 				<< "." << endl << endl;
 	}
+
 	return 0;
 }
