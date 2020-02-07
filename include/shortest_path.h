@@ -5,8 +5,8 @@
  *      Author: andrea.yuste
  */
 
-#ifndef HW2_SHORTEST_PATH_H_
-#define HW2_SHORTEST_PATH_H_
+#ifndef INCLUDE_SHORTEST_PATH_H_
+#define INCLUDE_SHORTEST_PATH_H_
 
 #include "graph.h"
 
@@ -29,4 +29,4 @@ private:
 	graph G; // graph on which the algorithm is being run
 };
 
-#endif /* HW2_SHORTEST_PATH_H_ */
+#endif /* INCLUDE_SHORTEST_PATH_H_ */

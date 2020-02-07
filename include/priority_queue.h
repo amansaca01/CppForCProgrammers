@@ -8,8 +8,8 @@
  *      in the shortest path calculation at the top of the queue.
  */
 
-#ifndef HW2_PRIORITY_QUEUE_H_
-#define HW2_PRIORITY_QUEUE_H_
+#ifndef INCLUDE_PRIORITY_QUEUE_H_
+#define INCLUDE_PRIORITY_QUEUE_H_
 
 #include "graph.h"
 
@@ -28,8 +28,8 @@ public:
 	int size(); //returns the number of queue_elements.
 
 	// Additional methods
-	void chgPrioirity(const int &node, const size_t &priority); //changes the priority of queue element.
-	void insert(const int &node, const size_t &priority); //insert queue_element into queue (last position)
+	void chgPrioirity(const int &node, const int &priority); //changes the priority of queue element.
+	void insert(const int &node, const int &priority); //insert queue_element into queue (last position)
 	int get_priority(const int &node); //return the node priority
 	void priority_sort(); //sorts nodes_queue by priority
 
@@ -43,4 +43,4 @@ private:
 	std::vector<int> nodes_queue; // Queue of nodes
 };
 
-#endif /* HW2_PRIORITY_QUEUE_H_ */
+#endif /* INCLUDE_PRIORITY_QUEUE_H_ */

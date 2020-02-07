@@ -5,7 +5,7 @@
  *      Author: andrea.yuste
  */
 
-#include "graph.h"
+#include "../include/graph.h"
 
 graph::graph(const int &size, const float &density, const int &range) :
 		size(size), range(range) {

@@ -5,14 +5,14 @@
  *      Author: andrea.yuste
  */
 
-#include "priority_queue.h"
+#include "../include/priority_queue.h"
 
 #include <algorithm>
 
 // PROPOSED METHODS
 
 PriorityQueue::PriorityQueue(const graph &G) :
-		priority(priority), queue_element(queue_element), G(G) {
+		G(G) {
 }
 
 // Changes the priority (node value) of queue element.
@@ -48,14 +48,14 @@ int PriorityQueue::size() {
 
 // ADITIONAL METHODS
 
-void PriorityQueue::chgPrioirity(const int &node, const size_t &priority) {
+void PriorityQueue::chgPrioirity(const int &node, const int &priority) {
 	// std::size_t can store the maximum size of a theoretically possible object of any type
 	if (priority >= 0 && contains(node)) {
 		G.set_node_value(node, priority);
 	}
 }
 
-void PriorityQueue::insert(const int &node, const size_t &priority) {
+void PriorityQueue::insert(const int &node, const int &priority) {
 	if (!contains(node)) {
 		nodes_queue.push_back(node);
 		chgPrioirity(node, priority);

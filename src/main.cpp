@@ -4,9 +4,9 @@
 #include <vector>
 #include <numeric>
 
-#include "graph.h"
-#include "priority_queue.h"
-#include "shortest_path.h"
+#include "../include/graph.h"
+#include "../include/priority_queue.h"
+#include "../include/shortest_path.h"
 
 using namespace std;
 
