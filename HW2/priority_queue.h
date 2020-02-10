@@ -17,20 +17,21 @@
 class PriorityQueue {
 public:
 	PriorityQueue(const int &size);
+	PriorityQueue(const std::vector<int> &node_vector, const int &size);
 	virtual ~PriorityQueue() = default;
 
 	void chgPrioirity(const int &node, const int &priority); //changes the priority of queue element.
 	void minPrioirty(); //removes the top element of the queue
 	bool contains_node(const int &node);
-	void insert(const int &node, const int &priority); //insert queue_element into queue (last position)
+	void insert(const int &node, const int &priority = 0); //insert queue_element into queue (last position)
+	void insert(const std::vector<int> &nodes, const int &priority = 0); //insert queue_element into queue (last position)
 	int top(); //returns the top element of the queue
 	int tail(); //returns the last element of the queue
 
 	int size(); //return the number of queue_elements
 	int get_priority(const int &node); //return the node priority
-	void set_priority(const int &node,const int &priority); //sets node priority
+	void set_priority(const int &node, const int &priority); //sets node priority
 	void priority_sort(); //sorts node_queue by priority
-
 
 private:
 	std::vector<int> node_queue; // Queue of nodes

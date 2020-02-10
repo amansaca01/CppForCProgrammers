@@ -6,6 +6,7 @@
  */
 
 #include<vector>
+#include <string>
 
 #ifndef GRAPH_H_
 #define GRAPH_H_
@@ -16,10 +17,13 @@ class graph {
 public:
 	graph(const int &size = 1, const float &density = 0, const pairs &range =
 			std::make_pair(1, 10));
+
+	graph(const std::string file_name,
+			const pairs &range = std::make_pair(1, 10));
 	virtual ~graph() = default;
 
 	float prob();
-	int prob(const pairs &range);
+	int prob_int(const pairs &range);
 	int V(); //returns the number of vertices in the graph
 	int E(); //returns the number of edges in the graph
 	bool adjacent(const int &x, const int &y); //tests whether there is an edge from node x to node y.
@@ -31,6 +35,7 @@ public:
 	void set_node_value(const int &x, const int &a); //sets the value associated with the node x to a.
 	int get_edge_value(const int &x, const int &y); //returns the value associated to the edge (x,y).
 	void set_edge_value(const int &x, const int &y, const int &distance); //sets the value associated to the edge (x,y) to v.
+	bool is_looped();
 	void print_graph();
 
 private:

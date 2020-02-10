@@ -7,13 +7,13 @@
 
 using namespace std;
 
-int main() {
+int main_old() {
 
 	srand(time(0));
 
 	int nodes_no = 50;
 
-	for (auto &density : vector<float> { 0.2, 0.4 }) {
+	for (auto &density : vector<float> {0.2, 0.4 }) {
 
 		cout << endl << "Computing average shortest path for a random graph of "
 				<< nodes_no << " and density " << density * 100 << "% ..."
@@ -23,6 +23,8 @@ int main() {
 		//	G.print_graph();
 
 		ShortestPath djisktra(G);
+		cout << "Connected: " << static_cast<int>(djisktra.is_connected())
+				<< endl;
 
 		vector<int> paths;
 

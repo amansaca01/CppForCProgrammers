@@ -19,7 +19,6 @@ ShortestPath::ShortestPath(const graph &G) :
 	nodes_queues.resize(size, size);
 }
 
-
 std::vector<int> ShortestPath::vertices() {
 
 	std::vector<int> lista(G.V());
@@ -78,5 +77,35 @@ void ShortestPath::djistra_algo(const int &u, const int &w) {
 
 	closed_queue->priority_sort();
 
+}
+
+bool ShortestPath::is_connected() {
+
+	PriorityQueue closed_queue({0},G.V());
+	PriorityQueue open_queue(G.neighbors(0),G.V());
+
+	while (closed_queue.size() < G.V()) {
+
+		if (open_queue.size() == 0) {
+			return false;
+		}
+
+		int next_element = open_queue.top();
+		auto adjacents = G.neighbors(next_element);
+
+		for (auto &it : adjacents) {
+			if (!closed_queue.contains_node(it))
+				open_queue.insert(it);
+			else {
+				if (it == next_element)
+					std::cout << "This graph has loops!" << std::endl;
+			}
+		}
+
+		closed_queue.insert(next_element);
+		open_queue.minPrioirty();
+	}
+
+	return true;
 }
 

@@ -8,6 +8,8 @@
 #include "graph.h"
 #include<iostream>
 #include<vector>
+#include<fstream>
+#include<iterator>
 
 using namespace std;
 
@@ -26,12 +28,62 @@ graph::graph(const int &size, const float &density, const pairs &range) :
 	}
 }
 
+//graph::graph(const string file_name, const pairs &range) :
+//		range(range) {
+//
+//	ifstream data_file(file_name);
+//
+//	if (!data_file.is_open()) {
+//		throw(std::runtime_error("Unable to open file"));
+//	}
+//
+//	istream_iterator<int> start(data_file), end;
+//	vector<int> data(start, end);
+//
+//	auto line = data.begin();
+//	size = *line;
+//
+//	ad_matrix.resize(size, std::vector<int>(size, 0)); // initializes adjacent matrix with 0s
+//	nodes_value.resize(size, 0);
+//
+//	while (line != data.end()) {
+//		vector<int> values = { *(++line), *(++line), *(++line) };
+//		//add_edge(values[0], values[1], values[2]);
+//
+//		cout << values[0] << " " << values[1] << " " << values[2] << endl;
+//	}
+//
+//}
+
+graph::graph(const string file_name, const pairs &range) :
+		range(range) {
+
+	ifstream data_file(file_name);
+
+	if (!data_file.is_open()) {
+		throw(std::runtime_error("Unable to open file"));
+	}
+
+	string line;
+
+	getline(data_file, line);
+
+	//cout << line << endl;
+	string x, y, distance;
+	while (getline(data_file, x, ' ') && getline(data_file, y, ' ')
+			&& getline(data_file, distance, ' ')) {
+
+		cout << x << " " << y << " " << distance << endl ;
+
+	}
+
+}
 
 float graph::prob() {
 	return rand() / static_cast<float>(RAND_MAX);
 }
 
-int graph::prob(const pairs &range) {
+int graph::prob_int(const pairs &range) {
 	int total_range = range.second - range.first + 1;
 	return (rand() % total_range) + range.first;
 }
@@ -66,12 +118,13 @@ std::vector<int> graph::neighbors(const int &x) {
 }
 
 void graph::add_edge(const int &x, const int &y) {
-	add_edge(x, y, prob(range));
+	add_edge(x, y, prob_int(range));
 }
 
 void graph::add_edge(const int &x, const int &y, const int &distance) {
-	if (!adjacent(x, y) && x != y && distance <= range.second
-			&& distance >= range.first) {
+	cout << x << " " << y << " " << distance << endl;
+	if (!adjacent(x, y) && x != y) {
+
 		ad_matrix[x][y] = distance;
 		ad_matrix[y][x] = distance;
 	}
@@ -102,11 +155,19 @@ int graph::get_edge_value(const int &x, const int &y) {
 }
 
 void graph::set_edge_value(const int &x, const int &y, const int &distance) {
-	if (adjacent(x, y) && distance <= range.second && distance >= range.first) {
+	if (adjacent(x, y)) {
 		ad_matrix[x][y] = distance;
 		ad_matrix[y][x] = distance;
 
 	}
+}
+
+bool graph::is_looped() {
+	for (int i = 0; i < size; ++i) {
+		if (ad_matrix[i][i] != 0)
+			return false;
+	}
+	return true;
 }
 
 void graph::print_graph() {
