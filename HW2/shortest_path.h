@@ -18,6 +18,7 @@ public:
 	std::vector<int> vertices(); //list of vertices in G(V,E)
 	int path_size(const int &u, const int &w); //return the path cost associated with the shortest path
 	void djistra_algo(const int &u, const int &w); //computes de Djistra algorithm
+	std::pair<int, graph> MST(); // Prims minumum expanning tree, returns const and vector of edges.
 	bool is_connected();
 
 private:

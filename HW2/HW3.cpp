@@ -12,10 +12,16 @@ int main() {
 	srand(time(0));
 
 	graph G("HW2/SampleTestData.txt");
+	ShortestPath tree(G);
 
-	cout << G.V() << endl;
+	auto minimum_tree = tree.MST();
 
-	G.print_graph();
+	cout << minimum_tree.first << endl;
+
+
+	minimum_tree.second.print_graph();
+
+	cout << endl << ShortestPath(minimum_tree.second).is_connected() <<endl;
 
 	return 0;
 }

@@ -6,12 +6,12 @@
  */
 
 #include "priority_queue.h"
+#include "graph.h"
 
 #include <iostream>
 #include<vector>
 #include <algorithm>
 
-#include "graph.h"
 
 PriorityQueue::PriorityQueue(const int &size) {
 	node_priority.resize(size, 0);

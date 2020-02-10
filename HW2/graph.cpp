@@ -51,6 +51,20 @@ graph::graph(const string file_name, const pairs &range) :
 
 }
 
+graph::graph(const std::vector<pairs> edges, const graph &origin,
+		const pairs &range) {
+
+	size = origin.V();
+
+	ad_matrix.resize(size, std::vector<int>(size, 0)); // initializes adjacents matrix with 0s
+	nodes_value.resize(size, 0);
+
+	for (auto &edge : edges) {
+		add_edge(edge.first, edge.second,
+				origin.get_edge_value(edge.first, edge.second));
+	}
+}
+
 float graph::prob() {
 	return rand() / static_cast<float>(RAND_MAX);
 }
@@ -60,7 +74,7 @@ int graph::prob_int(const pairs &range) {
 	return (rand() % total_range) + range.first;
 }
 
-int graph::V() {
+int graph::V() const{
 	return size;
 }
 int graph::E() {
@@ -76,7 +90,7 @@ int graph::E() {
 	return edges;
 }
 
-bool graph::adjacent(const int &x, const int &y) {
+bool graph::adjacent(const int &x, const int &y) const {
 	return ad_matrix[x][y] != 0;
 }
 
@@ -118,7 +132,7 @@ void graph::set_node_value(const int &x, const int &a) {
 		nodes_value.at(x) = a;
 }
 
-int graph::get_edge_value(const int &x, const int &y) {
+int graph::get_edge_value(const int &x, const int &y) const {
 	if (adjacent(x, y))
 		return ad_matrix[x][y];
 	return 0; // returns 0 if there is no edge
