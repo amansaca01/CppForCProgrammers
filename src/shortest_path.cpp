@@ -5,10 +5,9 @@
  *      Author: andrea.yuste
  */
 
-#include "../include/shortest_path.h"
-
 #include <numeric>
 
+#include "../include/shortest_path.h"
 #include "../include/priority_queue.h"
 
 // PROPOSED METHODS

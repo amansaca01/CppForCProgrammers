@@ -7,27 +7,27 @@
 
 #include "../include/graph.h"
 
-Graph::Graph(const int &size, const float &density, const int &range) :
+Graph::Graph(const int& size, const float& density, const int& range) :
 		size(size), range(range) {
 
 	ad_matrix = new int*[size];
+	for (int i = 0; i < size; ++i)
+		ad_matrix[i] = new int[size];
 
 	for (int i = 0; i < size; ++i) {
 
+		// Fill in the node vector
 		nodes_values.push_back(i + 1);
-		ad_matrix[i] = new int[size];
 
 		// We assume that there is no edge that goes from a node to itself
-//		ad_matrix[i][i] = 0;
-		delete_edge(0, 0);
+		delete_edge(i, i);
 
-		for (int j = 0; j < i; ++j) {
+		for (int j = i + 1; j < size; ++j) {
+
 			// We place an edge in the graph if a random probability calculation is less than the density
 			if (prob() < density) {
 				add_edge(i, j);
 			} else {
-//				ad_matrix[i][j] = 0;
-//				ad_matrix[j][i] = 0;
 				delete_edge(i, j);
 			}
 		}
@@ -35,6 +35,7 @@ Graph::Graph(const int &size, const float &density, const int &range) :
 }
 
 // PROPOSED METHODS
+
 // Returns the number of vertices in the graph
 int Graph::V() {
 	return size;
@@ -53,12 +54,12 @@ int Graph::E() {
 }
 
 // Tests whether there is an edge from node x to node y
-bool Graph::adjacent(const int &x, const int &y) {
+bool Graph::adjacent(const int& x, const int& y) {
 	return ad_matrix[x][y] != 0;
 }
 
 // Lists all nodes y such that there is an edge from x to y
-std::vector<int> Graph::neighbors(const int &x) {
+std::vector<int> Graph::neighbors(const int& x) {
 	std::vector<int> adjacents;
 	for (int i = 0; i < size; ++i) {
 		if (adjacent(x, i))
@@ -68,52 +69,48 @@ std::vector<int> Graph::neighbors(const int &x) {
 }
 
 // Adds to G the edge from x to y, if it is not there
-void Graph::add_edge(const int &x, const int &y) {
-	if (!adjacent(x, y)) {
-		// The edge distance would be selected at random from the distance range
-		int distance = (rand() % (range - 1)) + 1;
-		ad_matrix[x][y] = distance;
-		ad_matrix[y][x] = distance;
-	}
+void Graph::add_edge(const int& x, const int& y) {
+	// The edge distance would be selected at random from the distance range
+	int distance = (rand() % (range - 1)) + 1;
+	ad_matrix[x][y] = distance;
+	ad_matrix[y][x] = distance;
 }
 
 // Removes the edge from x to y, if it is there
-void Graph::delete_edge(const int &x, const int &y) {
-	if (adjacent(x, y)) {
-		ad_matrix[x][y] = 0;
-		ad_matrix[y][x] = 0;
-	}
+void Graph::delete_edge(const int& x, const int& y) {
+	ad_matrix[x][y] = 0;
+	ad_matrix[y][x] = 0;
 }
 
 // Returns the value associated with the node x
-int Graph::get_node_value(const int &x) {
+int Graph::get_node_value(const int& x) {
 	if (x >= 0 && x < size)
 		return nodes_values.at(x);
 	return -1; //if x is not a node
 }
 
 // Sets the value associated with the node x to a
-void Graph::set_node_value(const int &x, const int &a) {
+void Graph::set_node_value(const int& x, const int& a) {
 	if (x >= 0 && x < size && a >= 0 && a < size)
 		nodes_values.at(x) = a;
 }
 
 // Returns the value associated to the edge (x,y)
-int Graph::get_edge_value(const int &x, const int &y) {
+int Graph::get_edge_value(const int& x, const int& y) {
 	if (adjacent(x, y))
 		return ad_matrix[x][y];
 	return -1; //if there is no edge
 }
 
 // Sets the value associated to the edge (x,y) to distance
-void Graph::set_edge_value(const int &x, const int &y, const int &distance) {
+void Graph::set_edge_value(const int& x, const int& y, const int& distance) {
 	if (adjacent(x, y) && distance > 0 && distance <= range) {
 		ad_matrix[x][y] = distance;
 		ad_matrix[y][x] = distance;
 	}
 }
 
-// ADITIONAL METHODS
+// ADDITIONAL METHODS
 
 // Returns random number between o and 1
 float Graph::prob() {
@@ -121,7 +118,7 @@ float Graph::prob() {
 }
 
 // Returns random distance in between the distance range
-int Graph::distance(const int &range) {
+int Graph::distance(const int& range) {
 	return (rand() % (range - 1)) + 1;
 }
 
