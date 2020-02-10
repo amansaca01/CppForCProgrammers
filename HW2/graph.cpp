@@ -28,32 +28,6 @@ graph::graph(const int &size, const float &density, const pairs &range) :
 	}
 }
 
-//graph::graph(const string file_name, const pairs &range) :
-//		range(range) {
-//
-//	ifstream data_file(file_name);
-//
-//	if (!data_file.is_open()) {
-//		throw(std::runtime_error("Unable to open file"));
-//	}
-//
-//	istream_iterator<int> start(data_file), end;
-//	vector<int> data(start, end);
-//
-//	auto line = data.begin();
-//	size = *line;
-//
-//	ad_matrix.resize(size, std::vector<int>(size, 0)); // initializes adjacent matrix with 0s
-//	nodes_value.resize(size, 0);
-//
-//	while (line != data.end()) {
-//		vector<int> values = { *(++line), *(++line), *(++line) };
-//		//add_edge(values[0], values[1], values[2]);
-//
-//		cout << values[0] << " " << values[1] << " " << values[2] << endl;
-//	}
-//
-//}
 
 graph::graph(const string file_name, const pairs &range) :
 		range(range) {
@@ -61,20 +35,18 @@ graph::graph(const string file_name, const pairs &range) :
 	ifstream data_file(file_name);
 
 	if (!data_file.is_open()) {
-		throw(std::runtime_error("Unable to open file"));
+		throw(std::runtime_error("Unable to open file."));
 	}
 
-	string line;
+	data_file >> size;
 
-	getline(data_file, line);
+	ad_matrix.resize(size, std::vector<int>(size, 0)); // initializes adjacents matrix with 0s
+	nodes_value.resize(size, 0);
 
-	//cout << line << endl;
-	string x, y, distance;
-	while (getline(data_file, x, ' ') && getline(data_file, y, ' ')
-			&& getline(data_file, distance, ' ')) {
-
-		cout << x << " " << y << " " << distance << endl ;
-
+	int x, y, distance;
+	while (!data_file.eof()) {
+		data_file >> x >> y >> distance;
+		add_edge(x, y, distance);
 	}
 
 }
@@ -122,9 +94,7 @@ void graph::add_edge(const int &x, const int &y) {
 }
 
 void graph::add_edge(const int &x, const int &y, const int &distance) {
-	cout << x << " " << y << " " << distance << endl;
 	if (!adjacent(x, y) && x != y) {
-
 		ad_matrix[x][y] = distance;
 		ad_matrix[y][x] = distance;
 	}

@@ -15,7 +15,7 @@ int main() {
 
 	cout << G.V() << endl;
 
-//	G.print_graph();
+	G.print_graph();
 
 	return 0;
 }
