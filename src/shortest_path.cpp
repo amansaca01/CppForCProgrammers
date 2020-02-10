@@ -13,7 +13,7 @@
 
 // PROPOSED METHODS
 
-ShortestPath::ShortestPath(const graph &G) :
+ShortestPath::ShortestPath(const Graph &G) :
 		G(G) {
 }
 

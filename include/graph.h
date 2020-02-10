@@ -14,11 +14,11 @@
 
 using namespace std;
 
-class graph {
+class Graph {
 
 public:
-	graph(const int &size = 1, const float &density = 0, const int &range = 10);
-	virtual ~graph() = default;
+	Graph(const int &size = 1, const float &density = 0, const int &range = 10);
+	virtual ~Graph() = default;
 
 	// Proposed methods
 	int V(); //returns the number of vertices in the graph.
@@ -37,10 +37,12 @@ public:
 	int distance(const int &range);
 	void print_graph();
 
+	// Public elements
+	int size; //number of nodes
+
 private:
 	int** ad_matrix; //connectivity matrix
 	vector<int> nodes_values; //keeps the values associated with the node x
-	int size; //number of nodes
 	int range; //upper edges distance range
 };
 

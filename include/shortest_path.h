@@ -18,7 +18,7 @@ class ShortestPath {
 
 public:
 	// Proposed methods
-	ShortestPath(const graph &G);
+	ShortestPath(const Graph &G);
 	virtual ~ShortestPath() = default;
 
 	std::vector<int> vertices(); //list of vertices in G(V,E)
@@ -26,7 +26,7 @@ public:
 	int path_size(const int &u, const int &w); //return the path cost associated with the shortest path
 
 private:
-	graph G; // graph on which the algorithm is being run
+	Graph G; // graph on which the algorithm is being run
 };
 
 #endif /* INCLUDE_SHORTEST_PATH_H_ */

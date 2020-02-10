@@ -26,7 +26,7 @@ int main() {
 		// Generate a random graph
 		int size = 50;
 		int range = 10;
-		graph G(size, *density, range);
+		Graph G(size, *density, range);
 
 		// Print the graph
 		cout

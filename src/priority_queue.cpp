@@ -11,7 +11,7 @@
 
 // PROPOSED METHODS
 
-PriorityQueue::PriorityQueue(const graph &G) :
+PriorityQueue::PriorityQueue(const Graph &G) :
 		G(G) {
 }
 
@@ -33,6 +33,7 @@ bool PriorityQueue::contains(const int &queue_element) {
 
 // Insert queue_element into queue
 void PriorityQueue::Insert(const int &queue_element) {
+//	nodes_queue.insert(nodes_queue.begin(), queue_element);
 	nodes_queue.push_back(queue_element);
 }
 

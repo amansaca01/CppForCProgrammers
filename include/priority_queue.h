@@ -17,7 +17,7 @@ class PriorityQueue {
 
 public:
 	// Proposed methods
-	PriorityQueue(const graph &G);
+	PriorityQueue(const Graph &G);
 	virtual ~PriorityQueue() = default;
 
 	void chgPrioirity(const int &priority); //changes the priority (node value) of queue element.
@@ -33,14 +33,16 @@ public:
 	int get_priority(const int &node); //return the node priority
 	void priority_sort(); //sorts nodes_queue by priority
 
+	// Public elements ~
+	std::vector<int> nodes_queue; // Queue of nodes
+
 private:
 	// Proposed elements
 	int priority;
 	int queue_element;
 
 	// Additional elements
-	graph G; // graph on which the algorithm is being run
-	std::vector<int> nodes_queue; // Queue of nodes
+	Graph G; // graph on which the algorithm is being run
 };
 
 #endif /* INCLUDE_PRIORITY_QUEUE_H_ */
