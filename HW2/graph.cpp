@@ -1,8 +1,8 @@
 /*
  * graph.cpp
  *
- *  Created on: Jan 27, 2020
- *      Author: amanda.salazar
+ *  Created on: Jan 30, 2020
+ *      Author: diego.gozalo
  */
 
 #include "graph.h"
@@ -12,10 +12,10 @@
 using namespace std;
 
 graph::graph(const int &size, const float &density, const pairs &range) :
-		size(size), range(range) {
+        size(size),range(range) {
 
 	ad_matrix.resize(size, std::vector<int>(size, 0)); // initializes adjacents matrix with 0s
-	nodes_value.resize(size,0);
+	//nodes_value.resize(size,0);
 	for (int i = 0; i < size; ++i) {
 		for (int j = 0; j < i; ++j) {
 			if (prob() < density) {
@@ -24,6 +24,40 @@ graph::graph(const int &size, const float &density, const pairs &range) :
 		}
 	}
 }
+
+graph::graph(const string& filename) : filename(filename) {
+
+    ifstream dataf(filename);
+    if (!dataf.is_open()){
+        throw(std::runtime_error("Unable to open file"));
+    }
+
+    string line;
+
+    getline(dataf,line);
+    stringstream ss;
+    ss<<line;
+    ss>>size;
+
+    ad_matrix.resize(size, std::vector<int>(size, 0)); // initializes adjacents matrix with 0s
+
+    int num1,num2,num3;
+    while(getline(dataf,line))
+    {
+        stringstream ss;
+        ss<<line;
+        ss>>num1>>num2>>num3;
+        //cout<<num1<<" "<<num2<<" "<<num3<<endl;
+        int x=num1;
+        int y=num2;
+        int distance=num3;
+        if (!adjacent(x, y) && x != y) {
+            ad_matrix[x][y] = distance;
+            ad_matrix[y][x] = distance;
+        }
+    }
+}
+
 
 float graph::prob() {
 	return rand() / static_cast<float>(RAND_MAX);
@@ -82,16 +116,16 @@ void graph::delete_edge(const int &x, const int &y) {
 	}
 }
 
-int graph::get_node_value(const int &x) {
-	if (x >= 0 && x < size)
-		return nodes_value.at(x);
-	return -1; // returns 0 if x is not a node
-}
+//int graph::get_node_value(const int &x) {
+//	if (x >= 0 && x < size)
+//		return nodes_value.at(x);
+//	return -1; // returns 0 if x is not a node
+//}
 
-void graph::set_node_value(const int &x, const int &a) {
-	if (a >= 0 && x >= 0 && x < size)
-		nodes_value.at(x) = a;
-}
+//void graph::set_node_value(const int &x, const int &a) {
+//	if (a >= 0 && x >= 0 && x < size)
+//		nodes_value.at(x) = a;
+//}
 
 int graph::get_edge_value(const int &x, const int &y) {
 	if (adjacent(x, y))
@@ -103,7 +137,6 @@ void graph::set_edge_value(const int &x, const int &y, const int &distance) {
 	if (adjacent(x, y) && distance <= range.second && distance >= range.first) {
 		ad_matrix[x][y] = distance;
 		ad_matrix[y][x] = distance;
-
 	}
 }
 
