@@ -5,10 +5,10 @@
  *  Author: andrea.yuste
  */
 
-#ifndef INCLUDE_PRIORITY_QUEUE_H_
-#define INCLUDE_PRIORITY_QUEUE_H_
+#ifndef PRIORITY_QUEUE_H_
+#define PRIORITY_QUEUE_H_
 
-#include "graph.h"
+#include "../graph.h"
 
 class PriorityQueue {
 
@@ -42,4 +42,4 @@ private:
 	Graph G; // graph on which the algorithm is being run
 };
 
-#endif /* INCLUDE_PRIORITY_QUEUE_H_ */
+#endif /* PRIORITY_QUEUE_H_ */

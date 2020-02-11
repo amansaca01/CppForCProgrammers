@@ -5,8 +5,8 @@
  *  Author: andrea.yuste
  */
 
-#ifndef INCLUDE_GRAPH_H_
-#define INCLUDE_GRAPH_H_
+#ifndef GRAPH_H_
+#define GRAPH_H_
 
 #include <fstream>
 #include <iostream>
@@ -52,4 +52,4 @@ private:
 	string filename;
 };
 
-#endif /* INCLUDE_GRAPH_H_ */
+#endif /* GRAPH_H_ */
