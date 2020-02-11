@@ -8,7 +8,7 @@
 #ifndef PRIORITY_QUEUE_H_
 #define PRIORITY_QUEUE_H_
 
-#include "../graph.h"
+#include "graph.h"
 
 class PriorityQueue {
 

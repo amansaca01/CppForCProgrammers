@@ -10,8 +10,8 @@
 #include <iterator>
 #include <vector>
 
-#include "../include/graph.h"
-#include "../include/minimum_spanning_tree.h"
+#include "graph.h"
+#include "minimum_spanning_tree.h"
 
 using namespace std;
 

@@ -5,7 +5,7 @@
  * 	Author : andrea.yuste
  */
 
-#include "../include/minimum_spanning_tree.h"
+#include "minimum_spanning_tree.h"
 
 #include <algorithm>
 #include <iostream>

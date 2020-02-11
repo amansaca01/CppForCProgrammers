@@ -5,7 +5,7 @@
  *  Author: andrea.yuste
  */
 
-#include "../include/priority_queue.h"
+#include "priority_queue.h"
 
 #include <algorithm>
 

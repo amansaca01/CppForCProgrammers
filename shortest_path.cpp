@@ -7,8 +7,8 @@
 
 #include <numeric>
 
-#include "../include/shortest_path.h"
-#include "../include/priority_queue.h"
+#include "shortest_path.h"
+#include "priority_queue.h"
 
 // PROPOSED METHODS
 
