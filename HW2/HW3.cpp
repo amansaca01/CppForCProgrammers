@@ -16,12 +16,7 @@ int main() {
 
 	graph minimum_tree = tree.MST();
 
-	G.print_graph();
-	cout << endl;
-	minimum_tree.print_graph();
-
-	cout << endl << minimum_tree.tree_cost() <<endl;
-	cout << endl << ShortestPath(minimum_tree).is_connected() <<endl;
+	cout << endl << "Tree cost: "<< minimum_tree.tree_cost() <<endl;
 
 	return 0;
 }

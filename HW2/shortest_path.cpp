@@ -81,18 +81,13 @@ graph ShortestPath::MST() {
 		return min_tree;
 	}
 
-	std::cout << n_nodes << std::endl;
-
-	PriorityQueue node_set(n_nodes);
+	PriorityQueue node_set( { 0 }, n_nodes);
 	PriorityQueue edge_queue(n_nodes * n_nodes + 1);
 
-	int next_node = 0;
+	int next_node = node_set.top();
 	pairs next_edge;
 
 	while (node_set.size() < n_nodes) {
-
-		node_set.insert(next_node);
-
 		std::vector<int> adjacents = G.neighbors(next_node);
 
 		for (auto &ad : adjacents) {
@@ -103,12 +98,18 @@ graph ShortestPath::MST() {
 		}
 		edge_queue.priority_sort();
 
-		next_edge = G.get_nodes(edge_queue.top());
-		edge_queue.minPrioirty();
+		while (node_set.contains_node(next_node)) {
+			next_edge = G.get_nodes(edge_queue.top());
+			edge_queue.minPrioirty();
+			next_node = next_edge.second;
+		}
 
-		next_node = next_edge.second;
 		min_tree.add_edge(next_edge.first, next_node,
 				G.get_edge_value(next_edge.first, next_node));
+		node_set.insert(next_node);
+
+		std::cout << next_edge.first << " --> "
+				<< next_node << "  ("<<  G.get_edge_value(next_edge.first, next_node)<<")"  << std::endl;
 	}
 	return min_tree;
 }
