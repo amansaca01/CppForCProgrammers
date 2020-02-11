@@ -14,14 +14,14 @@ int main() {
 	graph G("HW2/SampleTestData.txt");
 	ShortestPath tree(G);
 
-	auto minimum_tree = tree.MST();
+	graph minimum_tree = tree.MST();
 
-	cout << minimum_tree.first << endl;
+	G.print_graph();
+	cout << endl;
+	minimum_tree.print_graph();
 
-
-	minimum_tree.second.print_graph();
-
-	cout << endl << ShortestPath(minimum_tree.second).is_connected() <<endl;
+	cout << endl << minimum_tree.tree_cost() <<endl;
+	cout << endl << ShortestPath(minimum_tree).is_connected() <<endl;
 
 	return 0;
 }

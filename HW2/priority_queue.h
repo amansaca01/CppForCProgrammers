@@ -24,10 +24,8 @@ public:
 	void minPrioirty(); //removes the top element of the queue
 	bool contains_node(const int &node);
 	void insert(const int &node, const int &priority = 0); //insert queue_element into queue (last position)
-	void insert(const std::vector<int> &nodes, const int &priority = 0); //insert queue_element into queue (last position)
 	int top(); //returns the top element of the queue
 	int tail(); //returns the last element of the queue
-
 	int size(); //return the number of queue_elements
 	int get_priority(const int &node); //return the node priority
 	void set_priority(const int &node, const int &priority); //sets node priority

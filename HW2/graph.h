@@ -19,8 +19,6 @@ public:
 			std::make_pair(1, 10));
 	graph(const std::string file_name,
 			const pairs &range = std::make_pair(1, 10));
-	graph(const std::vector<pairs> edges, const graph &origin,
-			const pairs &range = std::make_pair(1, 10));
 	virtual ~graph() = default;
 
 	float prob();
@@ -32,16 +30,16 @@ public:
 	void add_edge(const int &x, const int &y); //adds the edge from x to y, if it is not there
 	void add_edge(const int &x, const int &y, const int &distance); //adds the edge from x to y a certain distance
 	void delete_edge(const int &x, const int &y); //removes the edge from x to y, if it is there.
-	int get_node_value(const int &x); // returns the value associated with the node x.
-	void set_node_value(const int &x, const int &a); //sets the value associated with the node x to a.
 	int get_edge_value(const int &x, const int &y) const; //returns the value associated to the edge (x,y).
 	void set_edge_value(const int &x, const int &y, const int &distance); //sets the value associated to the edge (x,y) to v.
+	int get_edge_id(const int &x, const int &y); // returns an ID for a graph
+	pairs get_nodes(const int &edge_id); // gets the nodes that an edge connects
 	bool is_looped();
+	int tree_cost(); // return the sum of all edge values
 	void print_graph();
 
 private:
 	std::vector<std::vector<int>> ad_matrix; // connectivity matrices are used
-	std::vector<int> nodes_value;
 	int size; // number of nodes
 	pairs range; // pair containing upper and lower edges distance range
 };

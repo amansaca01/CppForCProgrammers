@@ -12,12 +12,12 @@
 #include<vector>
 #include <algorithm>
 
-
 PriorityQueue::PriorityQueue(const int &size) {
 	node_priority.resize(size, 0);
 }
 
-PriorityQueue::PriorityQueue(const std::vector<int> &node_vector,const int &size) {
+PriorityQueue::PriorityQueue(const std::vector<int> &node_vector,
+		const int &size) {
 	node_priority.resize(size, 0);
 	for (auto &it : node_vector) {
 		insert(it, 0);
@@ -39,6 +39,7 @@ bool PriorityQueue::contains_node(const int &node) {
 	return std::find(node_queue.begin(), node_queue.end(), node)
 			!= node_queue.end();
 }
+
 void PriorityQueue::insert(const int &node, const int &priority) {
 
 	if (!contains_node(node)) {
@@ -47,19 +48,6 @@ void PriorityQueue::insert(const int &node, const int &priority) {
 	} else {
 		if (get_priority(node) > priority)
 			chgPrioirity(node, priority);
-	}
-}
-
-void PriorityQueue::insert(const std::vector<int> &nodes, const int &priority) {
-
-	for (auto &node : nodes) {
-		if (!contains_node(node)) {
-			node_queue.push_back(node);
-			chgPrioirity(node, priority);
-		} else {
-			if (get_priority(node) > priority)
-				chgPrioirity(node, priority);
-		}
 	}
 }
 

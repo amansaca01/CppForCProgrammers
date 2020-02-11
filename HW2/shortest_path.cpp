@@ -9,7 +9,6 @@
 #include "priority_queue.h"
 #include "graph.h"
 #include <vector>
-#include <numeric> //iota
 #include<iostream>
 #include <algorithm>
 
@@ -17,13 +16,6 @@ ShortestPath::ShortestPath(const graph &G) :
 		G(G) {
 	int size = this->G.V();
 	nodes_queues.resize(size, size);
-}
-
-std::vector<int> ShortestPath::vertices() {
-
-	std::vector<int> lista(G.V());
-	std::iota(lista.begin(), lista.end(), 0);
-	return lista;
 }
 
 int ShortestPath::path_size(const int &u, const int &w) {
@@ -79,63 +71,52 @@ void ShortestPath::djistra_algo(const int &u, const int &w) {
 
 }
 
-std::pair<int, graph> ShortestPath::MST() {
-
-//std::pair<int, std::vector<pairs>> ShortestPath::MST() {
+graph ShortestPath::MST() {
 
 	int n_nodes = G.V();
-	int cost=0;
-	graph min_tree(n_nodes,0);
+	graph min_tree(n_nodes, 0);
 
-
-	if(!is_connected()){
-	//	throw(std::runtime_error("The graph is not connected."));
-
+	if (!is_connected()) {
 		std::cout << "The graph is not connected." << std::endl;
-		return std::make_pair(-1, min_tree);
+		return min_tree;
 	}
 
-	PriorityQueue node_queue(n_nodes);
-	PriorityQueue edge_queue(G.E());
+	std::cout << n_nodes << std::endl;
 
-	vector<vector<int>> edges_id(G.E());
-	int id = 0;
+	PriorityQueue node_set(n_nodes);
+	PriorityQueue edge_queue(n_nodes * n_nodes + 1);
 
-	node_queue.insert(0,0);
-	int next_node;
+	int next_node = 0;
+	pairs next_edge;
 
-	while (node_queue.size() < n_nodes) {
+	while (node_set.size() < n_nodes) {
 
-		std::cout << next_node << " " << node_queue.get_priority(next_node)
-				<< std::endl;
+		node_set.insert(next_node);
+
 		std::vector<int> adjacents = G.neighbors(next_node);
 
-		for(auto &ad : adjacents){
-			edges_id.push_back(vector<int>{id,next_node,ad});
-			if(!node_queue.contains_node(ad)){
-				edge_queue.insert(ad, G.get_edge_value(next_node, ad));
+		for (auto &ad : adjacents) {
+			if (!node_set.contains_node(ad)) {
+				edge_queue.insert(G.get_edge_id(next_node, ad),
+						G.get_edge_value(next_node, ad));
 			}
 		}
-
 		edge_queue.priority_sort();
 
-		min_tree.add_edge(next_node, edge_queue.top(),
-				G.get_edge_value(next_node, edge_queue.top()));
-
-		int next_node_priority = edge_queue.get_priority(next_node);
-		cost += next_node_priority;
-		node_queue.insert(next_node,next_node_priority);
-		next_node = edge_queue.top();
+		next_edge = G.get_nodes(edge_queue.top());
 		edge_queue.minPrioirty();
+
+		next_node = next_edge.second;
+		min_tree.add_edge(next_edge.first, next_node,
+				G.get_edge_value(next_edge.first, next_node));
 	}
-//	return std::make_pair(cost,edges_path);
-	return std::make_pair(cost,min_tree);
+	return min_tree;
 }
 
 bool ShortestPath::is_connected() {
 
-	PriorityQueue closed_queue({0},G.V());
-	PriorityQueue open_queue(G.neighbors(0),G.V());
+	PriorityQueue closed_queue( { 0 }, G.V());
+	PriorityQueue open_queue(G.neighbors(0), G.V());
 
 	while (closed_queue.size() < G.V()) {
 		int next_element = open_queue.top();
