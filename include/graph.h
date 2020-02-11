@@ -2,14 +2,17 @@
  * graph.h
  *
  *  Created on: Jan 27, 2020
- *      Author: andrea.yuste
+ *  Author: andrea.yuste
  */
 
-#ifndef GRAPH_H_
-#define GRAPH_H_
+#ifndef INCLUDE_GRAPH_H_
+#define INCLUDE_GRAPH_H_
 
+#include <fstream>
 #include <iostream>
+#include <sstream>
 #include <stdlib.h>
+#include <string>
 #include <vector>
 
 using namespace std;
@@ -18,6 +21,7 @@ class Graph {
 
 public:
 	Graph(const int &size = 1, const float &density = 0, const int &range = 10);
+	Graph(const string& filename);
 	virtual ~Graph() = default;
 
 	// Proposed methods
@@ -38,12 +42,14 @@ public:
 	void print_graph();
 
 	// Public elements
-	int size; //number of nodes
+	int size = 0; //number of nodes
 
 private:
-	int** ad_matrix; //connectivity matrix
+	vector<vector<int>> ad_matrix; //connectivity matrix
 	vector<int> nodes_values; //keeps the values associated with the node x
-	int range; //upper edges distance range
+	int range = 0; //upper edges distance range
+
+	string filename;
 };
 
-#endif /* GRAPH_H_ */
+#endif /* INCLUDE_GRAPH_H_ */

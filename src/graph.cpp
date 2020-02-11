@@ -2,18 +2,21 @@
  * graph.cpp
  *
  *  Created on: Jan 27, 2020
- *      Author: andrea.yuste
+ *  Author: andrea.yuste
  */
 
 #include "../include/graph.h"
 
+using namespace std;
+
+// Constructor that generates a random graph
 Graph::Graph(const int& size, const float& density, const int& range) :
 		size(size), range(range) {
 
-	ad_matrix = new int*[size];
-	for (int i = 0; i < size; ++i)
-		ad_matrix[i] = new int[size];
+	// Create the connectivity matrix
+	ad_matrix = vector<vector<int>>(size, vector<int>(size, 0));
 
+	// Fill in the connectivity matrix
 	for (int i = 0; i < size; ++i) {
 
 		// Fill in the node vector
@@ -23,7 +26,6 @@ Graph::Graph(const int& size, const float& density, const int& range) :
 		delete_edge(i, i);
 
 		for (int j = i + 1; j < size; ++j) {
-
 			// We place an edge in the graph if a random probability calculation is less than the density
 			if (prob() < density) {
 				add_edge(i, j);
@@ -31,6 +33,38 @@ Graph::Graph(const int& size, const float& density, const int& range) :
 				delete_edge(i, j);
 			}
 		}
+	}
+}
+
+// Constructor that can read in a graph from a file
+Graph::Graph(const string& filename) :
+		filename(filename) {
+
+	ifstream dataf(filename);
+	if (!dataf.is_open()) {
+		throw(std::runtime_error("Unable to open file"));
+	}
+
+	string line;
+
+	getline(dataf, line);
+	stringstream ss;
+	ss << line;
+	ss >> size;
+
+	// Initializes adjacent matrix with 0s
+	ad_matrix.resize(size, std::vector<int>(size, 0));
+
+	int num1, num2, num3;
+	while (getline(dataf, line)) {
+		stringstream ss;
+		ss << line;
+		ss >> num1 >> num2 >> num3;
+		int x = num1;
+		int y = num2;
+		int distance = num3;
+		ad_matrix[x][y] = distance;
+		ad_matrix[y][x] = distance;
 	}
 }
 

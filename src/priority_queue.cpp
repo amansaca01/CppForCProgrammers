@@ -2,7 +2,7 @@
  * priority_queue.cpp
  *
  *  Created on: Jan 29, 2020
- *      Author: andrea.yuste
+ *  Author: andrea.yuste
  */
 
 #include "../include/priority_queue.h"
@@ -50,7 +50,6 @@ int PriorityQueue::size() {
 // ADITIONAL METHODS
 
 void PriorityQueue::chgPrioirity(const int &node, const int &priority) {
-	// std::size_t can store the maximum size of a theoretically possible object of any type
 	if (priority >= 0 && contains(node)) {
 		G.set_node_value(node, priority);
 	}
