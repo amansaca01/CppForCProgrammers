@@ -19,7 +19,7 @@ int main() {
 
 	// Read in a graph from a file
 	Graph G(
-			"/home/andrea.yuste/git/CppForCProgrammers/files/sample_test_data.txt");
+			"/home/andrea.yuste/git/CppForCProgrammers/HW2/sample_test_data.txt");
 	cout << "The graph read from the file is:" << endl;
 	G.print_graph();
 	cout << endl;

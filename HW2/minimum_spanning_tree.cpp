@@ -12,7 +12,6 @@
 #include <vector>
 #include <numeric>
 
-
 MinimumSpanningTree::MinimumSpanningTree(const Graph & G) :
 		G(G) {
 }
@@ -59,6 +58,10 @@ int MinimumSpanningTree::Cost(Graph G) {
 			G.delete_edge(node, closest_node);
 		}
 	}
+
+	cout << "The reduced graph is:" << endl;
+	G.print_graph();
+	cout << endl;
 
 	cout << "The tree reaches the nodes in the following order: " << endl;
 	for (std::vector<int>::const_iterator i = closed_set.nodes_queue.begin();
